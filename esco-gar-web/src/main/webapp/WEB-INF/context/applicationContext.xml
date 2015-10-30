@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2014 GIP RECIA http://www.recia.fr
+    @Author (C) 2014 Julien Gribonvald - julien.gribonvald@recia.fr
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    				http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<!-- Properties configuration -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		lazy-init="false">
+		<property name="locations">
+			<list><value>classpath:configuration.properties</value></list>
+		</property>
+	</bean>
+
+	<bean name="authenticationFilter"
+		class="org.jasig.cas.client.authentication.AuthenticationFilter"
+		p:casServerLoginUrl="${cas.server.base.url}/login" p:renew="false"
+		p:gateway="false" p:serverName="${application.server.base}" />
+
+	<!--
+		Ticket validation filter for servlet targets
+	-->
+	<bean id="ticketValidationFilter"
+		class="org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter"
+		p:serverName="${application.server.base}" p:redirectAfterValidation="false"
+		p:proxyReceptorUrl="/proxy/receptor" p:ticketValidator-ref="ticketValidator"
+		p:proxyGrantingTicketStorage-ref="proxyGrantingTicketStorage"/>
+
+	<!--
+		Validates service and proxy tickets for both the servlet targets and
+		proxy portlet
+	-->
+	<bean id="ticketValidator"
+		class="org.esco.gar.utils.EscoCas20ProxyTicketValidator"
+		p:proxyCallbackUrl="${application.server.base}/${application.context}/proxy/receptor"
+		p:proxyGrantingTicketStorage-ref="proxyGrantingTicketStorage"
+		p:acceptAnyProxy="true">
+		<constructor-arg index="0" value="${cas.server.base.url}" />
+	</bean>
+
+	<bean id="proxyGrantingTicketStorage"
+		class="org.jasig.cas.client.proxy.ProxyGrantingTicketStorageImpl"/>
+
+</beans>

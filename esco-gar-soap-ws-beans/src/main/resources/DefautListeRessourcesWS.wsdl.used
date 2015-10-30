@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://impl.ws.gar.demogar.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://ws.gar.demogar.com/" name="DefautListeRessourcesWSService" targetNamespace="http://impl.ws.gar.demogar.com/">
+  <wsdl:import location="https://demonstrateur-gar-1.orion.education.fr/gar/ws/listeRessource/?wsdl=ListeRessourcesWS.wsdl" namespace="http://ws.gar.demogar.com/">
+    </wsdl:import>
+  <wsdl:binding name="DefautListeRessourcesWSServiceSoapBinding" type="ns1:ListeRessourcesWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"></soap:binding>
+    <wsdl:operation name="recupererListeEtiquettes">
+      <soap:operation soapAction="" style="document"></soap:operation>
+      <wsdl:input name="recupererListeEtiquettes">
+        <soap:body use="literal"></soap:body>
+      </wsdl:input>
+      <wsdl:output name="recupererListeEtiquettesResponse">
+        <soap:body use="literal"></soap:body>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DefautListeRessourcesWSService">
+    <wsdl:port binding="tns:DefautListeRessourcesWSServiceSoapBinding" name="DefautListeRessourcesWSPort">
+      <soap:address location="https://demonstrateur-gar-1.orion.education.fr/gar/ws/listeRessource/"></soap:address>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

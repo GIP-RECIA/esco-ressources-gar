@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+
+	<defaultCache
+		maxElementsInMemory="100"
+		eternal="true"
+		overflowToDisk="false"
+		memoryStoreEvictionPolicy="LFU"/>
+
+	<cache name="org.esco.gar.ws.services.IGARRessources.getRessources"
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="20"
+		timeToLiveSeconds="30"
+		memoryStoreEvictionPolicy="LRU"
+		overflowToDisk="false" />
+
+</ehcache>

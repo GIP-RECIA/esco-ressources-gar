@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="DefautListeRessourcesWSService" targetNamespace="http://impl.ws.gar.demogar.com/" xmlns:ns1="http://ws.gar.demogar.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://impl.ws.gar.demogar.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:import namespace="http://ws.gar.demogar.com/" location="ListeRessourcesWS.wsdl">
+    </wsdl:import>
+  <wsdl:binding name="DefautListeRessourcesWSServiceSoapBinding" type="ns1:ListeRessourcesWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="recupererListeEtiquettes">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="recupererListeEtiquettes">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="recupererListeEtiquettesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DefautListeRessourcesWSService">
+    <wsdl:port name="DefautListeRessourcesWSPort" binding="tns:DefautListeRessourcesWSServiceSoapBinding">
+      <soap:address location="http://localhost:9090/DefautListeRessourcesWSPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

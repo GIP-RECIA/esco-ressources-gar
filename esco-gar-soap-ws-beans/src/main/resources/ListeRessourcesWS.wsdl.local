@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ListeRessourcesWS" targetNamespace="http://ws.gar.demogar.com/" xmlns:ns1="http://ws.gar.demogar.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema xmlns:tns="http://ws.gar.demogar.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://ws.gar.demogar.com/" version="1.0">
+
+  <xs:element name="recupererListeEtiquettes" type="tns:recupererListeEtiquettes"/>
+
+  <xs:element name="recupererListeEtiquettesResponse" type="tns:recupererListeEtiquettesResponse"/>
+
+  <xs:complexType name="recupererListeEtiquettes">
+    <xs:sequence>
+      <xs:element name="idEnt" type="xs:string"/>
+      <xs:element name="uai" type="xs:string"/>
+      <xs:element name="uid" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="recupererListeEtiquettesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:listeRessourcesWSResponseBean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="listeRessourcesWSResponseBean">
+    <xs:sequence>
+      <xs:element name="statut" type="xs:string"/>
+      <xs:element name="messageDeRetour" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ressources" nillable="true" type="tns:ressourceBean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ressourceBean">
+    <xs:sequence>
+      <xs:element name="identifiantRessource" type="xs:string"/>
+      <xs:element minOccurs="1" name="libelle" type="xs:string"/>
+      <xs:element minOccurs="1" name="dateDeFin" type="xs:dateTime"/>
+      <xs:element minOccurs="1" name="vignette" type="xs:string"/>
+      <xs:element name="specimen" type="xs:boolean"/>
+      <xs:element maxOccurs="unbounded" name="typologieRessource" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="typologieDocument" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="niveau" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="typePedagogique" nillable="true" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="discipline" nillable="true" type="xs:string"/>
+      <xs:element name="urlAccesGar" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="appartenanceBeans" nillable="true" type="tns:appartenanceBean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="appartenanceBean">
+    <xs:sequence>
+      <xs:element name="niveauAppartenance" type="xs:string"/>
+      <xs:element name="valeurAppartenance" type="xs:string"/>
+      <xs:element name="uai" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="recupererListeEtiquettesResponse">
+    <wsdl:part name="parameters" element="ns1:recupererListeEtiquettesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="recupererListeEtiquettes">
+    <wsdl:part name="parameters" element="ns1:recupererListeEtiquettes">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ListeRessourcesWS">
+    <wsdl:operation name="recupererListeEtiquettes">
+      <wsdl:input name="recupererListeEtiquettes" message="ns1:recupererListeEtiquettes">
+    </wsdl:input>
+      <wsdl:output name="recupererListeEtiquettesResponse" message="ns1:recupererListeEtiquettesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

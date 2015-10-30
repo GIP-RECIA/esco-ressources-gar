@@ -1,0 +1,8 @@
+target/
+
+.project
+.metadata
+.classpath
+.settings/
+
+esco-gar-web/src/main/resources/configuration.properties
